@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "b" {
   provider = aws.west
-  bucket = "project-cloud-groep-3.1.1"
+  bucket = "project-cloud-martijn"
   acl    = "public-read"
 
   website {
@@ -34,7 +34,7 @@ resource "aws_s3_bucket_policy" "b" {
       "Effect": "Allow",
       "Principal": "*",
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::project-cloud-groep-3.1.1/*"
+      "Resource": "arn:aws:s3:::project-cloud-martijn/*"
     }
   ]
 }

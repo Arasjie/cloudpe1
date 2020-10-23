@@ -16,7 +16,7 @@ resource "aws_security_group" "database" {
 
 data "aws_db_snapshot" "fase3dbsnapshot" {
     most_recent = true
-    db_instance_identifier = "fase3db"
+    db_instance_identifier = "fase1db"
 }
 
 resource "aws_db_subnet_group" "default" {
@@ -34,11 +34,11 @@ resource "aws_db_instance" "service" {
   engine                      = "mysql"
   engine_version              = "5.7.26"
   instance_class              = "db.t2.micro"
-  name                        = "fase3db"
+  name                        = "fase1db"
   username                    = "admin"
-  password                    = "Pxl2019!"
+  password                    = "Pxl2020!"
   # password                    = aws_secretsmanager_secret_version.rdstf.secret_string
-  identifier                  = "fase3db"
+  identifier                  = "fase1db"
   skip_final_snapshot         = true
   snapshot_identifier         = data.aws_db_snapshot.fase3dbsnapshot.id
   db_subnet_group_name        = aws_db_subnet_group.default.name
