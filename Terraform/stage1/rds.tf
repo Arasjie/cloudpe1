@@ -6,7 +6,7 @@ resource "aws_security_group" "database" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = ["${aws_security_group.web.id}"]
+    security_groups = ["aws_security_group.web.id"]
   }
 
   tags = {
@@ -14,21 +14,7 @@ resource "aws_security_group" "database" {
   }
 }
 
-data "aws_db_snapshot" "fase3dbsnapshot" {
-    most_recent = true
-    db_instance_identifier = "fase1db"
-}
-
-resource "aws_db_subnet_group" "default" {
-  name       = "main"
-  subnet_ids = ["${aws_subnet.privateA.id}", "${aws_subnet.privateB.id}", "${aws_subnet.privateC.id}"]
-
-  tags = {
-    Name = "My DB subnet group"
-  }
-}
-
-resource "aws_db_instance" "service" {
+resource "aws_db_instance" "prod" {
   allocated_storage           = 20
   storage_type                = "gp2"
   engine                      = "mysql"
@@ -39,9 +25,31 @@ resource "aws_db_instance" "service" {
   password                    = "Pxl2020!"
   # password                    = aws_secretsmanager_secret_version.rdstf.secret_string
   identifier                  = "fase1db"
-  skip_final_snapshot         = true
-  snapshot_identifier         = data.aws_db_snapshot.fase3dbsnapshot.id
   db_subnet_group_name        = aws_db_subnet_group.default.name
   multi_az                    = true
   allow_major_version_upgrade = true
+}
+
+data "aws_db_snapshot" "latest_prod_snapshot" {
+  most_recent = true
+  db_instance_identifier = aws_db_instance.prod.id
+}
+
+resource "aws_db_instance" "dev" {
+  instance_class = "db.t2.micro"
+  name           = "fase1dbdev"
+  snapshot_identifier = data.aws_db_snapshot.latest_prod_snapshot.id
+
+  lifecycle {
+    ignore_changes = [snapshot_identifier]
+  }
+}
+
+resource "aws_db_subnet_group" "default" {
+  name       = "main"
+  subnet_ids = ["aws_subnet.privateA.id", "aws_subnet.privateB.id", "aws_subnet.privateC.id"]
+
+  tags = {
+    Name = "My DB subnet group"
+  }
 }
