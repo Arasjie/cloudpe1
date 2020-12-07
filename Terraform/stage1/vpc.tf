@@ -12,7 +12,7 @@ tags = {
 
 } # end resource
 
-# create the Subnet
+# create the Subnets
 resource "aws_subnet" "PE_CNA_Subnet" {
   vpc_id                  = aws_vpc.PE_CNA.id
   cidr_block              = var.subnetCIDRblock
@@ -21,7 +21,80 @@ resource "aws_subnet" "PE_CNA_Subnet" {
 tags = {
    Name = "PE CNA Subnet"
 }
-} # end resource
+}
+
+# publicA
+resource "aws_subnet" "publicA" {
+    vpc_id = aws_vpc.PE_CNA.id
+
+    cidr_block = "172.31.203.0/24"
+    availability_zone = "us-east-1a"
+
+    tags = {
+        Name = "publicA"
+    }
+}
+
+# publicB
+resource "aws_subnet" "publicB" {
+    vpc_id = aws_vpc.PE_CNA.id
+
+    cidr_block = "172.31.204.0/24"
+    availability_zone = "us-east-1b"
+
+    tags = {
+        Name = "publicB"
+    }
+}
+
+# publicC
+resource "aws_subnet" "publicC" {
+    vpc_id = aws_vpc.PE_CNA.id
+
+    cidr_block = "172.31.205.0/24"
+    availability_zone = "us-east-1c"
+
+    tags = {
+        Name = "publicC"
+    }
+}
+
+# privateA
+resource "aws_subnet" "privateA" {
+    vpc_id = aws_vpc.PE_CNA.id
+
+    cidr_block = "172.31.200.0/24"
+    availability_zone = "us-east-1a"
+
+    tags = {
+        Name = "privateA"
+    }
+}
+
+# privateB
+resource "aws_subnet" "privateB" {
+    vpc_id = aws_vpc.PE_CNA.id
+
+    cidr_block = "172.31.201.0/24"
+    availability_zone = "us-east-1b"
+
+    tags = {
+        Name = "privateB"
+    }
+}
+
+# privateC
+resource "aws_subnet" "privateC" {
+    vpc_id = aws_vpc.PE_CNA.id
+
+    cidr_block = "172.31.202.0/24"
+    availability_zone = "us-east-1c"
+
+    tags = {
+        Name = "privateC"
+    }
+}
+ # end resource
 
 # Create the PE CNA CloudLoadBalancer Security Group
 resource "aws_security_group" "PE_CNA_CloudLoadBalancer_Security_Group" {

@@ -14,11 +14,25 @@ resource "aws_s3_bucket" "b" {
   }
 }
 
-resource "aws_s3_bucket_object" "file_upload" {
+resource "aws_s3_bucket_object" "file_upload_nature" {
   provider = aws.west
   bucket = aws_s3_bucket.b.id
-  key    = "robinzenface.jpg"
-  source = "robin.jpg"
+  key    = "nature.jpg"
+  source = "nature.jpg"
+}
+
+resource "aws_s3_bucket_object" "file_upload_fords" {
+  provider = aws.west
+  bucket = aws_s3_bucket.b.id
+  key    = "fjords.jpg"
+  source = "fjords.jpg"
+}
+
+resource "aws_s3_bucket_object" "file_upload_lights" {
+  provider = aws.west
+  bucket = aws_s3_bucket.b.id
+  key    = "lights.jpg"
+  source = "lights.jpg"
 }
 
 resource "aws_s3_bucket_policy" "b" {
