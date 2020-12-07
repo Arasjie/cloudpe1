@@ -1,11 +1,5 @@
 # vpc.tf 
 # Create VPC/Subnet/Security Group/Network ACL
-
-provider "aws" {
-  version = "~> 2.0"
-  region = var.region
-}
-
 # create the VPC
 resource "aws_vpc" "PE_CNA" {
   cidr_block           = var.vpcCIDRblock
