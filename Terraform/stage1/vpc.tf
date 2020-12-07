@@ -144,6 +144,34 @@ tags = {
 }
 } # end resource
 
+#Create the loadbalance security group
+resource "aws_security_group" "loadbalancer" {
+    name        = "loadbalancer-terraform"
+    description = "loadbalancer"
+
+  ingress {
+    # TLS (change to whatever ports you need)
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  egress {
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "loadbalancer-terraform"
+  }
+}
+
+
 #create the web security group
 resource "aws_security_group" "web" {
   name        = "web-terraform"
