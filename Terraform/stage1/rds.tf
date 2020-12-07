@@ -33,6 +33,7 @@ resource "aws_db_instance" "prod" {
 data "aws_db_snapshot" "latest_prod_snapshot" {
   most_recent = true
   db_instance_identifier = aws_db_instance.prod.id
+  db_snapshot_identifier = "prodsnapshot"
 }
 
 resource "aws_db_instance" "dev" {
