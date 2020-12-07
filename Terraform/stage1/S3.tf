@@ -1,12 +1,6 @@
-provider "aws" {
-  alias  = "west"
-  region = "us-west-1"
-}
-
 resource "aws_s3_bucket" "b" {
   bucket = "project-cloud-martijn"
   acl    = "public-read"
-  provider = aws.west
 
   website {
     index_document = "index.html"
@@ -15,28 +9,24 @@ resource "aws_s3_bucket" "b" {
 }
 
 resource "aws_s3_bucket_object" "file_upload_nature" {
-  provider = aws.west
   bucket = aws_s3_bucket.b.id
   key    = "nature.jpg"
   source = "nature.jpg"
 }
 
 resource "aws_s3_bucket_object" "file_upload_fords" {
-  provider = aws.west
   bucket = aws_s3_bucket.b.id
   key    = "fjords.jpg"
   source = "fjords.jpg"
 }
 
 resource "aws_s3_bucket_object" "file_upload_lights" {
-  provider = aws.west
   bucket = aws_s3_bucket.b.id
   key    = "lights.jpg"
   source = "lights.jpg"
 }
 
 resource "aws_s3_bucket_policy" "b" {
-  provider = aws.west
   bucket = aws_s3_bucket.b.id
 
   policy = <<POLICY
