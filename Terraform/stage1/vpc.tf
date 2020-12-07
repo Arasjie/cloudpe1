@@ -144,6 +144,31 @@ tags = {
 }
 } # end resource
 
+#create the web security group
+resource "aws_security_group" "web" {
+  name        = "web-terraform"
+  description = "web"
+
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = ["${aws_security_group.loadbalancer.id}"]
+  }
+
+  egress {
+    from_port        = 3306
+    to_port          = 3306
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "web-terraform"
+  }
+}
+
 # Create the PE CNA Cloud Webserver Security Group
 resource "aws_security_group" "PE_CNA_CloudWebserver_Security_Group" {
   vpc_id       = aws_vpc.PE_CNA.id

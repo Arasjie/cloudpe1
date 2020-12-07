@@ -11,30 +11,6 @@ data "aws_ami" "ec2-ami" {
   owners = ["624402370087"]
 }
 
-resource "aws_security_group" "web" {
-  name        = "web-terraform"
-  description = "web"
-
-  ingress {
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    security_groups = ["${aws_security_group.loadbalancer.id}"]
-  }
-
-  egress {
-    from_port        = 3306
-    to_port          = 3306
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-
-  tags = {
-    Name = "web-terraform"
-  }
-}
-
 resource "aws_instance" "weba1" {
   ami                    = data.aws_ami.ec2-ami.id
   instance_type          = "t2.micro"
