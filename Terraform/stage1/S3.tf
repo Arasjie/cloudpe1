@@ -4,7 +4,6 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "b" {
-  provider = aws.west
   bucket = "project-cloud-martijn"
   acl    = "public-read"
 

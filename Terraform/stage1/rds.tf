@@ -1,4 +1,4 @@
-resource "aws_security_group" "database" {
+resource "aws_security_group" "database-terraform" {
   name        = "DB-terraform"
   description = "DB"
 
@@ -47,7 +47,7 @@ resource "aws_db_instance" "dev" {
 
 resource "aws_db_subnet_group" "default" {
   name       = "main"
-  subnet_ids = ["aws_subnet.privateA.id", "aws_subnet.privateB.id", "aws_subnet.privateC.id"]
+  subnet_ids = [aws_subnet.privateA.id, aws_subnet.privateB.id, aws_subnet.privateC.id]
 
   tags = {
     Name = "My DB subnet group"
