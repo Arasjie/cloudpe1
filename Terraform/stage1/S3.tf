@@ -6,6 +6,7 @@ provider "aws" {
 resource "aws_s3_bucket" "b" {
   bucket = "project-cloud-martijn"
   acl    = "public-read"
+  provider = aws.west
 
   website {
     index_document = "index.html"

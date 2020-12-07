@@ -1,5 +1,5 @@
 resource "aws_security_group" "database-terraform" {
-  name        = "DB-terraform"
+  name        = "DB-terraform2"
   description = "DB"
 
   ingress {
@@ -10,7 +10,7 @@ resource "aws_security_group" "database-terraform" {
   }
 
   tags = {
-    Name = "DB-terraform"
+    Name = "DB-terraform2"
   }
 }
 
