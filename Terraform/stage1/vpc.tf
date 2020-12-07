@@ -28,7 +28,7 @@ resource "aws_subnet" "publicA" {
     vpc_id = aws_vpc.PE_CNA.id
 
     cidr_block = "172.31.203.0/24"
-    availability_zone = "us-east-1a"
+    availability_zone = var.availabilityZone
 
     tags = {
         Name = "publicA"
@@ -40,7 +40,7 @@ resource "aws_subnet" "publicB" {
     vpc_id = aws_vpc.PE_CNA.id
 
     cidr_block = "172.31.204.0/24"
-    availability_zone = "us-east-1b"
+    availability_zone = var.availabilityZoneb
 
     tags = {
         Name = "publicB"
@@ -52,7 +52,7 @@ resource "aws_subnet" "publicC" {
     vpc_id = aws_vpc.PE_CNA.id
 
     cidr_block = "172.31.205.0/24"
-    availability_zone = "us-east-1c"
+    availability_zone = var.availabilityZonec
 
     tags = {
         Name = "publicC"
@@ -64,7 +64,7 @@ resource "aws_subnet" "privateA" {
     vpc_id = aws_vpc.PE_CNA.id
 
     cidr_block = "172.31.200.0/24"
-    availability_zone = "us-east-1a"
+    availability_zone = var.availabilityZone
 
     tags = {
         Name = "privateA"
@@ -76,7 +76,7 @@ resource "aws_subnet" "privateB" {
     vpc_id = aws_vpc.PE_CNA.id
 
     cidr_block = "172.31.201.0/24"
-    availability_zone = "us-east-1b"
+    availability_zone = var.availabilityZoneb
 
     tags = {
         Name = "privateB"
@@ -88,7 +88,7 @@ resource "aws_subnet" "privateC" {
     vpc_id = aws_vpc.PE_CNA.id
 
     cidr_block = "172.31.202.0/24"
-    availability_zone = "us-east-1c"
+    availability_zone = var.availabilityZonec
 
     tags = {
         Name = "privateC"

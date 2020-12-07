@@ -8,6 +8,14 @@ variable "availabilityZone" {
      default = "us-east-1a"
 }
 
+variable "availabilityZoneb" {
+     default = "us-east-1b"
+}
+
+variable "availabilityZonec" {
+     default = "us-east-1c"
+}
+
 variable "instanceTenancy" {
     default = "default"
 }
