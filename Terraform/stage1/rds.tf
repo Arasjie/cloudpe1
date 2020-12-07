@@ -28,6 +28,7 @@ resource "aws_db_instance" "prod" {
   db_subnet_group_name        = aws_db_subnet_group.default.name
   multi_az                    = true
   allow_major_version_upgrade = true
+  skip_final_snapshot         = false
 }
 
 data "aws_db_snapshot" "latest_prod_snapshot" {
