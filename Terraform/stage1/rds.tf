@@ -23,21 +23,24 @@ resource "aws_db_instance" "prod" {
   name                        = "fase1db"
   username                    = "admin"
   password                    = "Pxl2020!"
-  # password                    = aws_secretsmanager_secret_version.rdstf.secret_string
   identifier                  = "fase1db"
   db_subnet_group_name        = aws_db_subnet_group.default.name
   multi_az                    = true
   allow_major_version_upgrade = true
 }
 
+resource "aws_db_snapshot" "prod_snapshot" {
+  db_instance_identifier = aws_db_instance.prod.id
+  db_snapshot_identifier = "prod1"
+}
+
 data "aws_db_snapshot" "latest_prod_snapshot" {
-  db_instance_identifier = resource.aws_db_instance.prod.id
+  db_instance_identifier = aws_db_instance.prod.id
   most_recent = true
 }
 
 resource "aws_db_instance" "dev" {
   instance_class = "db.t2.micro"
-  name           = "fase1dbdev"
   snapshot_identifier = data.aws_db_snapshot.latest_prod_snapshot.id
 
   lifecycle {

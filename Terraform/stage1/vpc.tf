@@ -130,6 +130,13 @@ resource "aws_security_group" "PE_CNA_CloudLoadBalancer_Security_Group" {
     protocol    = "tcp" 
     cidr_blocks = ["193.190.154.173/32"]
   }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp" 
+    cidr_blocks = ["187.67.47.130/32"]
+  }
   
   # allow egress of all ports
   egress {
@@ -238,6 +245,13 @@ resource "aws_security_group" "PE_CNA_CloudWebserver_Security_Group" {
     to_port     = 22
     protocol    = "tcp" 
     cidr_blocks = ["193.190.154.174/32"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp" 
+    cidr_blocks = ["87.67.47.130/32"]
   }
   
   # allow egress of all ports

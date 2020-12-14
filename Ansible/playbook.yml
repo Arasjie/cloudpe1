@@ -21,7 +21,7 @@
         enabled: yes
 
     - name: clone git repo
-      git: repo=https://github.com/Arasjie/cloudpe1.git dest=/cloudandautomation/ update=no
+      git: repo=https://github.com/Arasjie/phpapp.git dest=/cloudandautomation/ update=no
 
     - name: cp to var,www,html
       command: cp -r /cloudandautomation/www /var/
