@@ -28,6 +28,11 @@ variable "dnsHostNames" {
     default = true
 }
 
+variable "public_key_path" {
+  description = "Public key path"
+  default = "~/.ssh/id_rsa.pub"
+}
+
 variable "vpcCIDRblock" {
     default = "172.31.0.0/16"
 }

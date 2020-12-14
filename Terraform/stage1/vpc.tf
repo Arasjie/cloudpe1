@@ -362,3 +362,8 @@ resource "aws_route_table_association" "PE_CNA_association" {
   subnet_id      = aws_subnet.PE_CNA_Subnet.id
   route_table_id = aws_route_table.PE_CNA_route_table.id
 } # end resource# end vpc.tf
+
+resource "aws_key_pair" "ec2key" {
+  key_name = "publicKey"
+  public_key = "${file(var.public_key_path)}"
+}
